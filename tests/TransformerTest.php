@@ -86,5 +86,4 @@ class TransformerTest extends TestCase
             $transformer::process(['Iwazaru' => 134, 'cl' => 212])
         );
     }
-
 }
