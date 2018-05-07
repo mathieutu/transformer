@@ -1,0 +1,124 @@
+{
+    "users": {
+        "annehousekeepings": {
+            "birthdate": "1977-06-22",
+            "gender": {"label": "Female", "value": 2},
+            "name": {
+                "first": "Emmett",
+                "last": "Pe",
+                "full": "Miss Emmett Pe"
+            },
+            "email": "amatidivedspunks@equatorialhingesmetaphorical.edu",
+            "postcode": "32 905",
+            "balance": "- 38 873 433,93 €"
+        },
+        "spitzvisitors": {
+            "birthdate": "2013-11-06",
+            "gender": {"label": "Male", "value": 1},
+            "name": {
+                "first": "Grant",
+                "last": "Olinick",
+                "full": "Mr Grant Olinick"
+            },
+            "email": "daleysphallus@disintegrations.net",
+            "postcode": "50 387",
+            "balance": "+ 127 209 845,67 €"
+        },
+        "nazismssuperficially": {
+            "birthdate": "1974-10-13",
+            "gender": {"label": "Female", "value": 2},
+            "name": {
+                "first": "Nicky",
+                "last": "Rallis",
+                "full": "Miss Nicky Rallis"
+            },
+            "email": "fangbedbugs@outreaches.edu",
+            "postcode": "57 532",
+            "balance": "- 248 959,22 €"
+        },
+        "marinadeduelists": {
+            "birthdate": "1983-06-15",
+            "gender": {"label": "Male", "value": 1},
+            "name": {
+                "first": "Derick",
+                "last": "Curreri",
+                "full": "Mr Derick Curreri"
+            },
+            "email": "deodorantskellogg@legating.net",
+            "postcode": "17 600",
+            "balance": "+ 853,63 €"
+        },
+        "scalars": {
+            "birthdate": "2010-11-14",
+            "gender": {"label": "Male", "value": 1},
+            "name": {
+                "first": "Hobert",
+                "last": "Jong",
+                "full": "Mr Hobert Jong"
+            },
+            "email": "occurrencescurred@insidesethicallyswags.net",
+            "postcode": "31 240",
+            "balance": "- 2 605,95 €"
+        },
+        "resurface": {
+            "birthdate": "2000-02-03",
+            "gender": {"label": "Female", "value": 2},
+            "name": {
+                "first": "Shelton",
+                "last": "Elison",
+                "full": "Miss Shelton Elison"
+            },
+            "email": "ibexheatstrokes@aridestspectators.gov",
+            "postcode": "28 516",
+            "balance": "- 1 877 321,15 €"
+        },
+        "blanking": {
+            "birthdate": "1981-05-03",
+            "gender": {"label": "Female", "value": 2},
+            "name": {
+                "first": "Russ",
+                "last": "Wickizer",
+                "full": "Miss Russ Wickizer"
+            },
+            "email": "amparosuncouple@dissimilarities.me",
+            "postcode": "72 897",
+            "balance": "- 28 561,36 €"
+        },
+        "hatcherysrime": {
+            "birthdate": "2000-04-19",
+            "gender": {"label": "Female", "value": 2},
+            "name": {
+                "first": "Maximo",
+                "last": "Hata",
+                "full": "Miss Maximo Hata"
+            },
+            "email": "astringencytroubleshoots@klimtchoreographed.gov",
+            "postcode": "21 172",
+            "balance": "- 2 713 712 979,27 €"
+        },
+        "totemspresumption": {
+            "birthdate": "2003-02-16",
+            "gender": {"label": "Male", "value": 1},
+            "name": {
+                "first": "Ty",
+                "last": "Steere",
+                "full": "Mr Ty Steere"
+            },
+            "email": "substratumlightlysnowfall@pamphleteerslolita.gov",
+            "postcode": "81 216",
+            "balance": "- 0,76 €"
+        },
+        "tailoring": {
+            "birthdate": "1980-04-22",
+            "gender": {"label": "Female", "value": 2},
+            "name": {
+                "first": "Parker",
+                "last": "Swonger",
+                "full": "Miss Parker Swonger"
+            },
+            "email": "qualifiedunconcerns@possibleginsbergprairies.gov",
+            "postcode": "87 676",
+            "balance": "+ 60 866,23 €"
+        }
+    }
+}
