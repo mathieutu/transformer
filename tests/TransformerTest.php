@@ -3,7 +3,6 @@
 namespace MathieuTu\Transformer\Tests;
 
 use MathieuTu\Transformer\Tests\Transformers\Integer;
-use MathieuTu\Transformer\Tests\Transformers\Number;
 use MathieuTu\Transformer\Tests\Transformers\User;
 use MathieuTu\Transformer\Tests\Transformers\Users;
 use MathieuTu\Transformer\Transformer;
@@ -71,7 +70,33 @@ class TransformerTest extends TestCase
         );
     }
 
-    public function testTransformingArrayandKeepingKeys()
+
+    public function testGetMethod()
+    {
+        $transformer = new class([
+            'nested1' => ['foo' => 'testFoo1', 'bar' => 'testBar1'],
+            'nested2' => ['foo' => 'testFoo2', 'bar' => 'testBar2'],
+        ]) extends Transformer
+        {
+        };
+
+        $this->assertEquals(
+            ['foo' => 'testFoo1', 'bar' => 'testBar1'],
+            $transformer->get('nested1')
+        );
+
+        $this->assertEquals(
+            'testFoo1',
+            $transformer->get('nested1.foo')
+        );
+
+        $this->assertEquals(
+            ['nested1.foo' => 'testFoo1', 'test' => null],
+            $transformer->get('nested1.foo', 'test')
+        );
+    }
+
+    public function testTransformingArrayAndKeepingKeys()
     {
         $transformer = new class([]) extends Transformer
         {
