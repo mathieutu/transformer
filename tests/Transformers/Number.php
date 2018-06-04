@@ -7,7 +7,7 @@ use MathieuTu\Transformer\Transformer;
 class Number extends Transformer
 {
 
-    protected function transform()
+    protected function map()
     {
         return number_format($this->get(), 2, ',', ' ');
     }

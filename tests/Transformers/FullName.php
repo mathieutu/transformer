@@ -7,7 +7,7 @@ use MathieuTu\Transformer\Transformer;
 class FullName extends Transformer
 {
 
-    protected function transform()
+    protected function map()
     {
         return ($this->get('sex') === 'f' ? 'Miss' : 'Mr')
             . ' ' . $this->get('name.first')

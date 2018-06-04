@@ -6,7 +6,7 @@ use MathieuTu\Transformer\Transformer;
 
 class Integer extends Transformer
 {
-    protected function transform()
+    protected function map()
     {
         return number_format($this->get(), 0, '', ' ');
     }

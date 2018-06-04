@@ -2,105 +2,42 @@
 
 namespace MathieuTu\Transformer;
 
-use MathieuTu\Exporter\ExporterService;
-use Tightenco\Collect\Support\Arr;
-use Tightenco\Collect\Support\Collection;
+use JsonSerializable;
 
-abstract class Transformer implements \JsonSerializable
+abstract class Transformer implements JsonSerializable, Arrayable, Jsonable, Serializable
 {
-    protected $key;
-    private $apiObject;
+    use Helpers;
+    use Transformations;
 
-    public function __construct($apiObject, $key = null)
+    private $key;
+    private $dataToTransform;
+
+    public function __construct($dataToTransform, $key = null)
     {
-        $this->apiObject = $apiObject;
+        $this->dataToTransform = $dataToTransform;
         $this->key = $key;
     }
 
-    public static function process($dataToTransform)
-    {
-        return json_decode(json_encode(new static($dataToTransform)), true);
-    }
 
-    public function __toString()
+    public function prepareTransformation()
     {
-        return (string) $this->jsonSerialize();
-    }
-
-    public function jsonSerialize()
-    {
-        if (($data = $this->get()) === null) {
-            return $data;
+        if ($this->dataToTransform === null) {
+            return $this->dataToTransform;
         }
 
-        if (!$this->keep() && \is_string($this->transform())) {
-            return $this->transform();
+        $toTransform = $this->map();
+
+        if (!is_iterable($toTransform)) {
+            return $toTransform;
         }
 
-        $this->addCollectionMacros();
-        return ExporterService::exportFrom($data, $this->keep())
-            ->mergeRecursive($this->getTransformedArray());
-    }
-
-    /**
-     * @param string[]|string $paths
-     *
-     * @return mixed
-     */
-    public function get($path = null, $_ = null)
-    {
-        if (\is_array($paths = $path) || count($paths = \func_get_args()) > 1) {
-            return collect($paths)->mapWithKeys(function ($path) {
-                return [$path => data_get($this->apiObject, $path)];
-            })->all();
-        };
-
-        return data_get($this->apiObject, $path);
-    }
-
-    protected function keep(): array
-    {
-        return [];
-    }
-
-    protected function transform()
-    {
-        return [];
-    }
-
-    private function addCollectionMacros(): void
-    {
-        Collection::macro('mergeRecursive', function ($items) {
-            return new static(array_merge_recursive($this->toArray(), $this->getArrayableItems($items)));
-        });
-    }
-
-    private function getTransformedArray()
-    {
-        $transformedArray = [];
-        foreach ($this->transform() as $key => $value) {
-            Arr::set($transformedArray, $key, $value);
+        $merged = Collection::make();
+        foreach ($toTransform as $key => $value) {
+            $merged = $merged->merge(\is_int($key) ? $value : [$key => $value]);
         }
 
-        return $transformedArray;
+        return $merged->parseNested();
     }
 
-    protected function with(string $transformerClass, $paths = null): Transformer
-    {
-        return new $transformerClass($this->get($paths));
-    }
-
-    protected function withSeveral(string $transformerClass, ?string $key = null): array
-    {
-        return collect($this->get($key))
-            ->mapInto($transformerClass)
-            ->mapWithKeys(function (self $transformer) {
-                return [$transformer->key() => $transformer];
-            })->all();
-    }
-
-    public function key()
-    {
-        return $this->key;
-    }
+    abstract protected function map();
 }

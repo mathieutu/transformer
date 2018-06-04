@@ -10,7 +10,7 @@ class Gender extends Transformer
         'm' => ['label' => 'Male', 'value' => 1],
         'f' => ['label' => 'Female', 'value' => 2],
     ];
-    protected function transform()
+    protected function map()
     {
         return self::GENDERS[$this->get()];
     }

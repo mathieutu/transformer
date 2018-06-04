@@ -7,7 +7,7 @@ use MathieuTu\Transformer\Transformer;
 class Balance extends Transformer
 {
 
-    protected function transform()
+    protected function map()
     {
         return $this->with(Positive::class, 'positive')
             . ' '

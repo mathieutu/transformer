@@ -14,7 +14,7 @@ class TransformerTest extends TestCase
     {
         $this->assertEquals(
             $this->getDestinationArray(),
-            Users::process($this->getSourceArray())
+            Users::transform($this->getSourceArray())
         );
     }
 
@@ -51,23 +51,7 @@ class TransformerTest extends TestCase
 
     public function testTransformNullValue()
     {
-        $this->assertEquals(null, User::process(null));
-    }
-
-    public function testTransformerWithNoTransformedAttributes()
-    {
-        $transformer = new class([]) extends Transformer
-        {
-            protected function keep(): array
-            {
-                return ['foo'];
-            }
-        };
-
-        $this->assertEquals(
-            ["foo" => "testFoo"],
-            $transformer::process(['foo' => 'testFoo', 'bar' => 'testBar'])
-        );
+        $this->assertEquals(null, User::transform(null));
     }
 
 
@@ -78,21 +62,29 @@ class TransformerTest extends TestCase
             'nested2' => ['foo' => 'testFoo2', 'bar' => 'testBar2'],
         ]) extends Transformer
         {
+            protected function map()
+            {
+            }
+
+            public function publicGet(...$args)
+            {
+                return parent::get(...$args);
+            }
         };
 
         $this->assertEquals(
             ['foo' => 'testFoo1', 'bar' => 'testBar1'],
-            $transformer->get('nested1')
+            $transformer->publicGet('nested1')
         );
 
         $this->assertEquals(
             'testFoo1',
-            $transformer->get('nested1.foo')
+            $transformer->publicGet('nested1.foo')
         );
 
         $this->assertEquals(
             ['nested1.foo' => 'testFoo1', 'test' => null],
-            $transformer->get('nested1.foo', 'test')
+            $transformer->publicGet(['nested1.foo', 'test'])
         );
     }
 
@@ -100,7 +92,7 @@ class TransformerTest extends TestCase
     {
         $transformer = new class([]) extends Transformer
         {
-            protected function transform()
+            protected function map()
             {
                 return $this->withSeveral(Integer::class);
             }
@@ -108,7 +100,7 @@ class TransformerTest extends TestCase
 
         $this->assertSame(
             ['Iwazaru' => '134', 'cl' => '212'],
-            $transformer::process(['Iwazaru' => 134, 'cl' => 212])
+            $transformer::transform(['Iwazaru' => 134, 'cl' => 212])
         );
     }
 }

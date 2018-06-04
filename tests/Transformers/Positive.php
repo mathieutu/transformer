@@ -7,7 +7,7 @@ use MathieuTu\Transformer\Transformer;
 class Positive extends Transformer
 {
 
-    protected function transform()
+    protected function map()
     {
         return $this->get() ? '+' : '-';
     }
