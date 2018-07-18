@@ -11,13 +11,19 @@ abstract class Transformer implements JsonSerializable, Arrayable, Jsonable, Ser
 
     private $key;
     private $dataToTransform;
+    protected $options;
 
-    public function __construct($dataToTransform, $key = null)
+    public static function transform($dataToTransform, $key = null, array $options = [])
+    {
+        return (new static($dataToTransform, $key, $options))->serialize();
+    }
+
+    public function __construct($dataToTransform, $key = null, array $options = [])
     {
         $this->dataToTransform = $dataToTransform;
         $this->key = $key;
+        $this->options = $options;
     }
-
 
     public function prepareTransformation()
     {
@@ -37,6 +43,16 @@ abstract class Transformer implements JsonSerializable, Arrayable, Jsonable, Ser
         }
 
         return $merged->parseNested();
+    }
+
+    public function getOptions(): array
+    {
+        return $this->options;
+    }
+
+    protected function with(string $transformerClass, $paths = null): Transformer
+    {
+        return new $transformerClass($this->get($paths), $paths, $this->options);
     }
 
     abstract protected function map();

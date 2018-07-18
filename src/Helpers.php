@@ -4,11 +4,6 @@ namespace MathieuTu\Transformer;
 
 trait Helpers
 {
-    protected function with(string $transformerClass, $paths = null): Transformer
-    {
-        return new $transformerClass($this->get($paths), $paths);
-    }
-
     /**
      * @param string[]|string $path
      * @param string $nestedIn
