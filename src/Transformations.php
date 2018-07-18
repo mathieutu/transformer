@@ -4,11 +4,6 @@ namespace MathieuTu\Transformer;
 
 trait Transformations
 {
-    public static function transform($dataToTransform, $key = null)
-    {
-        return (new static($dataToTransform, $key))->serialize();
-    }
-
     public function serialize()
     {
         $serialized = $this->prepareTransformation();

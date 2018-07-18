@@ -103,4 +103,27 @@ class TransformerTest extends TestCase
             $transformer::transform(['Iwazaru' => 134, 'cl' => 212])
         );
     }
+
+    /**
+     * @dataProvider transformerOptions
+     */
+    public function testTransformerCanAccessOptions(array $options)
+    {
+        $transformer = new class([], '', $options) extends Transformer {
+            protected function map()
+            {
+            }
+        };
+
+        $this->assertSame($options, $transformer->getOptions());
+    }
+
+    public function transformerOptions(): array
+    {
+        return [
+            [[]],
+            [['foor' => 'bar']],
+            [['foor' => 'bar', 'john' => 'doe']],
+        ];
+    }
 }
